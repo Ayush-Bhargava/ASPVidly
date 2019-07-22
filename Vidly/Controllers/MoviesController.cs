@@ -16,12 +16,12 @@ namespace Vidly.Controllers
             Movie movie = new Movie() { Name = "Shrek!" };
             List<Customer> customers = new List<Customer>
             {
-                new Customer {Name = "Customer 1"},
-                new Customer {Name = "Customer 2"},
-                new Customer {Name = "Customer 3"},
-                new Customer {Name = "Customer 4"},
-                new Customer {Name = "Customer 5"},
-                new Customer {Name = "Customer 6"},
+                new Customer {Name = "Kenna Dahlgren"},
+                new Customer {Name = "Dylan Sheats"},
+                new Customer {Name = "Veola Then"},
+                new Customer {Name = "Wyatt Everly"},
+                new Customer {Name = "Lyndsey Uchida"},
+                new Customer {Name = "Leonardo Folkerts"},
             };
 
             RandomMovieViewModel viewModel = new RandomMovieViewModel
@@ -61,6 +61,52 @@ namespace Vidly.Controllers
         {
 
             return Content(year + "/" + month);
+        }
+
+        public ActionResult Movies()
+        {
+            MoviesViewModel movies = new MoviesViewModel();
+            movies.Movies = new List<Movie>
+            {
+                new Movie {ID = 1, Name = "Pulp Fiction"},
+                new Movie {ID = 2, Name = "Schindler’s List"},
+                new Movie {ID = 3, Name = "12 Angry Men"},
+                new Movie {ID = 4, Name = "Gone With The Wind"},
+                new Movie {ID = 5, Name = "Shawshank Redemption"},
+                new Movie {ID = 6, Name = "The Godfather"},
+                new Movie {ID = 7, Name = "Citizen Kane"},
+                new Movie {ID = 8, Name = "The Matrix"},
+                new Movie {ID = 9, Name = "Avengers"},
+                new Movie {ID = 10, Name = "Fight Club"}
+            };
+            return View(movies);
+        }
+        public ActionResult Details(int id)
+        {
+            MoviesViewModel movies = new MoviesViewModel();
+        movies.Movies = new List<Movie>
+            {
+                new Movie {ID = 1, Name = "Pulp Fiction"},
+                new Movie {ID = 2, Name = "Schindler’s List"},
+                new Movie {ID = 3, Name = "12 Angry Men"},
+                new Movie {ID = 4, Name = "Gone With The Wind"},
+                new Movie {ID = 5, Name = "Shawshank Redemption"},
+                new Movie {ID = 6, Name = "The Godfather"},
+                new Movie {ID = 7, Name = "Citizen Kane"},
+                new Movie {ID = 8, Name = "The Matrix"},
+                new Movie {ID = 9, Name = "Avengers"},
+                new Movie {ID = 10, Name = "Fight Club"}
+            };
+
+            Movie movie = movies.Movies.Where(t => t.ID == id).FirstOrDefault();
+            if (movie!=null)
+            {
+                return View(movie);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
     }
 }
